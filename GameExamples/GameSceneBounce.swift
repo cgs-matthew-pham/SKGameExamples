@@ -6,8 +6,12 @@
 //  Copyright © 2019 Matthew Pham. All rights reserved.
 //
 
-import UIKit
+import SpriteKit
+import GameplayKit
 
 class GameSceneBounce: SKScene {
-
+    
+    override func didMove(to view: SKView) {
+        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+    }
 }
