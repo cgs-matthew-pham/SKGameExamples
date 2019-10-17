@@ -15,6 +15,31 @@ class GameSceneStart: SKScene {
     override func didMove(to view: SKView) {
         print("Start")
     }
+    
+    func displayName() {
+        
+    }
+    
+    func enterName() {
+        // Show an alert
+        let nameAlert = UIAlertController(title: "Enter Name", message: nil, preferredStyle: .alert)
+        let nameAction = UIAlertAction(title: "Okay", style: .default) { (theAlertAction) in
+            
+            let answer = nameAlert.textFields![0]
+            var labelName = self.childNode(withName: "labelName") as? SKLabelNode
+            labelName!.text = answer.text ?? ""
+        }
+        
+        // Text Field
+        nameAlert.addTextField()
+        nameAlert.addAction(nameAction)
+        
+        // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-uitextfield-to-a-uialertcontroller
+        
+        
+        self.view!.window!.rootViewController!.present(nameAlert, animated: true, completion: nil)
+        
+    }
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -25,6 +50,10 @@ class GameSceneStart: SKScene {
         let touchedNode = atPoint(touchLocation)
         
         print(touchedNode.name)
+        
+        if touchedNode.name == "buttonName" {
+            enterName()
+        }
         
         if touchedNode.name == "buttonDrop" {
             let newScene = GameSceneDrop(fileNamed: "GameSceneDrop")
