@@ -12,6 +12,8 @@ import GameplayKit
 
 class GameSceneStart: SKScene {
     
+    public static var name = ""
+    
     override func didMove(to view: SKView) {
         print("Start")
     }
@@ -27,6 +29,7 @@ class GameSceneStart: SKScene {
             
             let answer = nameAlert.textFields![0]
             var labelName = self.childNode(withName: "labelName") as? SKLabelNode
+            GameSceneStart.name = answer.text ?? ""
             labelName!.text = answer.text ?? ""
         }
         
@@ -78,6 +81,13 @@ class GameSceneStart: SKScene {
         
         if touchedNode.name == "buttonBounce" {
             let newScene = GameSceneBounce(fileNamed: "GameSceneBounce")
+            let transition = SKTransition.flipVertical(withDuration: 1.0)
+            newScene?.scaleMode = .aspectFill
+            scene?.view?.presentScene(newScene!, transition: transition)
+        }
+        
+        if touchedNode.name == "buttonMovement" {
+            let newScene = GameSceneMovement(fileNamed: "GameSceneMovement")
             let transition = SKTransition.flipVertical(withDuration: 1.0)
             newScene?.scaleMode = .aspectFill
             scene?.view?.presentScene(newScene!, transition: transition)
